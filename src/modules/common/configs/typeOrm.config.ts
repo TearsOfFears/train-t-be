@@ -2,27 +2,22 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm'
 import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface'
 
+function getSSLConfig(env: string) {
+  const configs = {
+    production: { rejectUnauthorized: true },
+    local: false,
+    deploy: { rejectUnauthorized: true },
+  }
+  if (!configs[env] === undefined) {
+    throw new Error('Set network in your .env file')
+  }
+
+  return configs[env]
+}
+
 const typeOrmConfigEnvs = (
   configService: ConfigService,
 ): TypeOrmModuleOptions => {
-  // if (withEntities) {
-  //   return {
-  //     host: configService.get<string>('POSTGRES_HOST'),
-  //     port: configService.get<number>('POSTGRES_PORT_DB'),
-  //     logging: ['error'],
-  //     type: 'postgres',
-  //     entities: ['dist/**/*.entity.{ts,js}', 'dist/**/*.view.{ts,js}'],
-  //     subscribers: ['dist/**/*.subscriber.{ts,js}'],
-  //     migrations: ['dist/migration/**/*.{ts,js}'],
-  //     useUTC: true,
-  //     database: configService.get<string>('POSTGRES_DB'),
-  //     schema: 'public',
-  //     username: configService.get<string>('POSTGRES_USER'),
-  //     password: configService.get<string>('POSTGRES_PASSWORD'),
-  //     ssl: getSSLConfig(configService.get<string>('SERVER_MODE')),
-  //     synchronize: true,
-  //   };
-  // }
   return {
     host: configService.get<string>('POSTGRES_HOST'),
     port: configService.get<number>('POSTGRES_PORT'),
@@ -36,9 +31,7 @@ const typeOrmConfigEnvs = (
     password: configService.get<string>('POSTGRES_PASSWORD'),
     schema: 'public',
     synchronize: true,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: getSSLConfig(configService.get<string>('NODE_ENV')),
   }
 }
 
