@@ -4,9 +4,9 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-op
 
 function getSSLConfig(env: string) {
   const configs = {
-    production: { rejectUnauthorized: true },
+    production: { rejectUnauthorized: false },
     local: false,
-    deploy: { rejectUnauthorized: true },
+    deploy: { rejectUnauthorized: false },
   }
   if (!configs[env] === undefined) {
     throw new Error('Set network in your .env file')
