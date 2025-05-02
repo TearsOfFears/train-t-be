@@ -36,6 +36,9 @@ const typeOrmConfigEnvs = (
     password: configService.get<string>('POSTGRES_PASSWORD'),
     schema: 'public',
     synchronize: true,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   }
 }
 
