@@ -1,1 +1,1 @@
-web: npm i && ls -l && npm run build && ls -l dist && npm run start:prod
+web: npm install && npm run build:prod && npm run start:prod
