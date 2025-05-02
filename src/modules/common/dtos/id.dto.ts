@@ -1,0 +1,11 @@
+import { ApiProperty } from '@nestjs/swagger'
+import { IsUUID } from 'class-validator'
+
+export class IdDTO {
+  @ApiProperty({
+    example: '03adea8e-0578-4b4e-b779-bdcbd32e40d0',
+    description: 'id',
+  })
+  @IsUUID()
+  id: string
+}
