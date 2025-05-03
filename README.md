@@ -1,14 +1,21 @@
-For start project, you should create .env file with these example envs:
+## Getting Started
 
-PORT=4400
-JWT_SECRET=superjwt
-JWT_EXPIRES_IN=1d
+1. Create a `.env` file in the root directory with the following content:
 
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5436
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=test
-POSTGRES_DB=train
+    ```
+    PORT=4400
+    JWT_SECRET=superjwt
+    JWT_EXPIRES_IN=1d
 
-Then run docker compose up
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5436
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=test
+    POSTGRES_DB=train
+    ```
 
+2. Start the project using Docker Compose:
+
+    ```bash
+    docker compose up
+    ```
