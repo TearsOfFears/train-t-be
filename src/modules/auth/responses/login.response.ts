@@ -20,7 +20,7 @@ export class LoginResponse {
   surname: string
 
   @Expose()
-  @ApiProperty({ description: 'Authentication token (JWT)', type: String })
+  @ApiProperty({ description: 'Authentication token (JWT )', type: String })
   token: string
 
   constructor(props: LoginResponse) {
